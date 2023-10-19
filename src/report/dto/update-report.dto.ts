@@ -1,4 +1,8 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateReportDto } from './create-report.dto';
-
-export class UpdateReportDto extends PartialType(CreateReportDto) {}
+export class UpdateReportDto {
+  readonly roomId: number;
+  readonly title: string;
+  readonly description: string;
+  readonly department: string;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+}
