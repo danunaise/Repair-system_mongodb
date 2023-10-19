@@ -31,11 +31,18 @@ export class ReportService {
 
   async update(id: string, report: Report) {
     const update = await this.reportModel
-      .findByIdAndUpdate({ _id: id }, report)
+      .findByIdAndUpdate({ _id: id }, report, {
+        new: true,
+        runValidators: true,
+      })
       .exec();
 
     if (!update) {
       return 'Report not found';
+    }
+
+    if (update) {
+      return 'Report updated successfully';
     }
 
     return update;
