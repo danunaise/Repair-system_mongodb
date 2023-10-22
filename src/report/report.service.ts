@@ -23,7 +23,7 @@ export class ReportService {
     const find = await this.reportModel.findById(id).exec();
 
     if (!find) {
-      return 'Report not found';
+      return { message: 'Report not found' };
     }
 
     return find;
@@ -38,11 +38,11 @@ export class ReportService {
       .exec();
 
     if (!update) {
-      return 'Report not found';
+      return { message: 'Report not found' };
     }
 
     if (update) {
-      return 'Report updated successfully';
+      return { message: 'Report updated successfully'};
     }
 
     return update;

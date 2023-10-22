@@ -13,6 +13,12 @@ export class Report {
   @Prop({ required: true })
   department: string;
 
+  @Prop({ default: 'pending' })
+  status: string;
+
+  @Prop({ default: '-' })
+  fixedBy: string;
+
   @Prop()
   createdAt: Date;
 
