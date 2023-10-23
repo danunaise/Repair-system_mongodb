@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Auth } from './schemas/auth.schema';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { log } from 'console';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +21,14 @@ export class AuthService {
     const foundUser = await this.authModel.findOne({ username: auth.username });
     if (foundUser) {
       throw new HttpException('User not created', 400);
+    }
+
+    if (auth.firstname === '') {
+      throw new HttpException('Firstname is required', 400);
+    }
+
+    if (auth.lastname === '') {
+      throw new HttpException('Lastname is required', 400);
     }
 
     const createdAuth = await this.authModel.create({
@@ -57,20 +66,25 @@ export class AuthService {
         return { access_token };
       }
     }
-
-    return { message: 'Username or password incorrect' };
+    throw new HttpException('Username or password incorrect', 400);
   }
 
   async getProfile(id: string) {
     const user = await this.authModel.findById(id);
     if (user) {
+      console.log(user);
       return {
         _id: user._id,
         username: user.username,
         role: user.role,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        department: user.department,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
       };
+      console.log(user);
     }
     return { message: 'User not found' };
   }

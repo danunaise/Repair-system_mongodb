@@ -10,6 +10,18 @@ export class Auth {
   @Prop({ default: 'user' })
   role: string;
 
+  @Prop({ required: true })
+  firstname: string;
+
+  @Prop({ required: true })
+  lastname: string;
+
+  @Prop({ required: true })
+  email: string;
+
+  @Prop()
+  department: string;
+
   @Prop()
   createdAt: Date;
 

@@ -42,7 +42,7 @@ export class ReportService {
     }
 
     if (update) {
-      return { message: 'Report updated successfully'};
+      return { message: 'Report updated successfully' };
     }
 
     return update;
